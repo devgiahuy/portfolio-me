@@ -5,7 +5,7 @@ export type Theme = "light" | "dark";
 const STORAGE_KEY = "huy-portfolio-theme";
 
 export function useTheme(): [Theme, () => void] {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
     const stored =

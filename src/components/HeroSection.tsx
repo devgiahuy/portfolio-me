@@ -1,7 +1,6 @@
-import React from "react";
 import type { HeroSectionProps } from "../types/sections";
 
-const HeroSection: React.FC<HeroSectionProps> = ({
+function HeroSection({
   id,
   name,
   role,
@@ -9,7 +8,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   githubUrl,
   email,
   phone,
-}) => {
+}: HeroSectionProps) {
   return (
     <section
       id={id}
@@ -174,7 +173,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
 
             {/* Floating tech icons */}
-            <div className="pointer-events-none absolute -top-3 left-0">
+            <div className="pointer-events-none absolute top-3 left-0">
               <div className="animate-[float_6s_ease-in-out_infinite] rounded-2xl border border-slate-200 bg-white/90 px-2.5 py-1.5 text-xs font-medium text-slate-800 shadow-cardSoft dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-100">
                 <span className="mr-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-sky-500/10 text-sky-500">
                   ⚛
@@ -182,7 +181,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 React
               </div>
             </div>
-            <div className="pointer-events-none absolute -right-1 top-10">
+            <div className="pointer-events-none absolute -right-9 top-10">
               <div className="animate-[float_7s_ease-in-out_infinite] rounded-2xl border border-slate-200 bg-white/90 px-2.5 py-1.5 text-xs font-medium text-slate-800 shadow-cardSoft dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-100">
                 <span className="mr-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-blue-500/10 text-blue-500">
                   TS
@@ -203,6 +202,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
     </section>
   );
-};
+}
 
 export default HeroSection;

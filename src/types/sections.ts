@@ -23,7 +23,7 @@ export type AboutSectionProps = SectionBaseProps & {
   description: string;
   location: string;
   university: string;
-  languages: string;
+  // languages: string;
   status: string;
 };
 
@@ -74,3 +74,9 @@ export type ContactSectionProps = SectionBaseProps & {
   email: string;
   githubUrl: string;
 };
+
+export interface RoadmapItem {
+  title: string;
+  description: string;
+  color: string;
+}

@@ -1,13 +1,12 @@
-import React from "react";
 import type { SkillsSectionProps } from "../types/sections";
 
-const SkillsSection: React.FC<SkillsSectionProps> = ({
+function SkillsSection({
   id,
   title,
   subtitle,
   categories,
   iconStacks,
-}) => {
+}: SkillsSectionProps) {
   return (
     <section
       id={id}
@@ -80,6 +79,6 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({
       </div>
     </section>
   );
-};
+}
 
 export default SkillsSection;

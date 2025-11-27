@@ -1,14 +1,45 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import type { ContactSectionProps } from "../types/sections";
 
-const ContactSection: React.FC<ContactSectionProps> = ({
+function ContactSection({
   id,
   title,
   subtitle,
   email,
   githubUrl,
-}) => {
+}: ContactSectionProps) {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate form
+    if (!form.name || !form.email || !form.message) {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 3000);
+      return;
+    }
+
+    // Create mailto link with pre-filled content
+    const subject = `Portfolio Contact from ${form.name}`;
+    const body = `Name: ${form.name}%0D%0AEmail: ${form.email}%0D%0A%0D%0AMessage:%0D%0A${form.message}`;
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${body}`;
+
+    // Open email client
+    window.location.href = mailtoLink;
+
+    // Show success message
+    setStatus("success");
+
+    // Reset form after a delay
+    setTimeout(() => {
+      setForm({ name: "", email: "", message: "" });
+      setStatus("idle");
+    }, 2000);
+  };
 
   return (
     <section
@@ -32,10 +63,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
         <div className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <form
             className="space-y-4 rounded-3xl border border-slate-200 bg-cardLight p-6 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark"
-            onSubmit={(e) => {
-              e.preventDefault();
-              // hook up to your backend or email service
-            }}
+            onSubmit={handleSubmit}
           >
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
@@ -87,11 +115,25 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                 placeholder="Tell me about the role or project..."
               />
             </div>
+
+            {status === "success" && (
+              <div className="rounded-xl bg-green-50 p-3 text-sm text-green-700 dark:bg-green-900/20 dark:text-green-400">
+                Opening your email client...
+              </div>
+            )}
+
+            {status === "error" && (
+              <div className="rounded-xl bg-red-50 p-3 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">
+                Please fill in all fields.
+              </div>
+            )}
+
             <button
               type="submit"
-              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary via-secondary to-accent px-6 py-2.5 text-sm font-semibold tracking-tight text-slate-50 shadow-cardSoft transition hover:brightness-110 dark:from-neonPurple dark:via-neonCyan dark:to-neonPurple dark:shadow-cardNeon"
+              disabled={status === "success"}
+              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary via-secondary to-accent px-6 py-2.5 text-sm font-semibold tracking-tight text-slate-50 shadow-cardSoft transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 dark:from-neonPurple dark:via-neonCyan dark:to-neonPurple dark:shadow-cardNeon"
             >
-              Send Message
+              {status === "success" ? "✓ Sent!" : "Send Message"}
             </button>
           </form>
 
@@ -157,6 +199,6 @@ const ContactSection: React.FC<ContactSectionProps> = ({
       </div>
     </section>
   );
-};
+}
 
 export default ContactSection;

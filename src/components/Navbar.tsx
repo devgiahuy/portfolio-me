@@ -1,4 +1,3 @@
-import React from "react";
 import ThemeToggle from "./ThemeToggle";
 import type { NavItem } from "../types/sections";
 import type { Theme } from "../hooks/useTheme";
@@ -11,13 +10,13 @@ type NavbarProps = {
   onToggleTheme: () => void;
 };
 
-const Navbar: React.FC<NavbarProps> = ({
+function Navbar({
   items,
   activeId,
   onNavigate,
   theme,
   onToggleTheme,
-}) => {
+}: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-backgroundLight/80 backdrop-blur-md dark:border-slate-800/80 dark:bg-backgroundDark/80">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
@@ -65,6 +64,6 @@ const Navbar: React.FC<NavbarProps> = ({
       </nav>
     </header>
   );
-};
+}
 
 export default Navbar;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
@@ -9,22 +9,18 @@ import EducationSection from "./components/EducationSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import { useTheme } from "./hooks/useTheme";
-import type {
-  NavItem,
-  Project,
-  TechExperienceItem,
-  SkillCategory,
-} from "./types/sections";
+import { useMouseGlow } from "./hooks/useMouseGlow";
+import {
+  navItems,
+  skillCategories,
+  iconStacks,
+  projects,
+  techExperienceItems,
+} from "./data";
+import RoadmapSection from "./components/RoadmapSection";
 
-const navItems: NavItem[] = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "tech-experience", label: "Experience Graph" },
-  { id: "contact", label: "Contact" },
-];
-
-const App: React.FC = () => {
+function App() {
+  useMouseGlow();
   const [theme, toggleTheme] = useTheme();
   const [activeId, setActiveId] = useState<string>("about");
 
@@ -63,125 +59,6 @@ const App: React.FC = () => {
     });
   };
 
-  const skillCategories: SkillCategory[] = [
-    {
-      title: "Programming Languages",
-      items: ["JavaScript", "TypeScript"],
-    },
-    {
-      title: "Frameworks / Libraries",
-      items: ["React", "Next.js"],
-    },
-    {
-      title: "Tools",
-      items: ["Git", "GitHub", "GitHub Actions", "Figma"],
-    },
-    {
-      title: "Soft Skills",
-      items: ["Teamwork", "Communication", "Self-learning", "Time Management"],
-    },
-  ];
-
-  const iconStacks = [
-    { label: "React", short: "R" },
-    { label: "TypeScript", short: "TS" },
-    { label: "Next.js", short: "N" },
-    { label: "TailwindCSS", short: "Tw" },
-    { label: "Zustand", short: "Z" },
-    { label: "React Query", short: "RQ" },
-    { label: "Git / GitHub", short: "G" },
-    { label: "Figma", short: "Fg" },
-  ];
-
-  const projects: Project[] = [
-    {
-      title: "Green Wheel (EV Rental Platform)",
-      role: "Frontend Developer",
-      description:
-        "A web app for electric vehicle rental enabling users to search EV availability, manage bookings, and process payments.",
-      techStack: [
-        "Next.js",
-        "TypeScript",
-        "TailwindCSS",
-        "TanStack Query",
-        "Axios",
-        "Zustand",
-        "Formik/Yup",
-        "i18n",
-        "NextStep.js",
-      ],
-      teamSize: "5",
-      githubUrl: "https://github.com/your-handle/green-wheel",
-      codeSnippet:
-        "const { data: vehicles } = useQuery(['vehicles'], fetchVehicles);\n\nreturn <VehicleGrid items={vehicles} />;",
-    },
-    {
-      title: "Ecom Orchid (Mini Project)",
-      role: "Frontend Developer",
-      description:
-        "A modern e-commerce web app for browsing orchids, managing carts, and placing orders with a responsive UI.",
-      techStack: [
-        "React",
-        "TypeScript",
-        "Vite",
-        "Zustand (persist)",
-        "React Query",
-        "TailwindCSS",
-        "HeroUI",
-        "Axios",
-        "JSON-Server / MockAPI",
-      ],
-      githubUrl: "https://github.com/your-handle/ecom-orchid",
-      codeSnippet:
-        "const useCartStore = create<CartState>()(\n  persist((set) => ({ items: [], addItem: (p) => set(...)}), { name: 'cart' })\n);",
-    },
-  ];
-
-  const techExperienceItems: TechExperienceItem[] = [
-    {
-      label: "React",
-      level: "Intermediate",
-      score: 4,
-      duration: "~1.5 years",
-    },
-    {
-      label: "TypeScript",
-      level: "Intermediate",
-      score: 4,
-      duration: "~1.5 years",
-    },
-    {
-      label: "Next.js",
-      level: "Intermediate",
-      score: 3.5,
-      duration: "~1 year",
-    },
-    {
-      label: "TailwindCSS",
-      level: "Intermediate",
-      score: 4,
-      duration: "~1.5 years",
-    },
-    {
-      label: "Zustand",
-      level: "Comfortable",
-      score: 3.5,
-      duration: "~1 year",
-    },
-    {
-      label: "React Query / TanStack",
-      level: "Comfortable",
-      score: 3.5,
-      duration: "~1 year",
-    },
-    {
-      label: "Git / GitHub",
-      level: "Intermediate",
-      score: 4,
-      duration: "~2 years",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-backgroundLight text-slate-900 dark:bg-backgroundDark dark:text-slate-50">
       <Navbar
@@ -198,9 +75,9 @@ const App: React.FC = () => {
         name="Ngo Gia Huy"
         role="Frontend Development Intern"
         subtitle="I build clean, modern, responsive web interfaces using React, TypeScript, and Next.js."
-        githubUrl="https://github.com/your-handle"
-        email="you@example.com"
-        phone="+84-000-000-000"
+        githubUrl="https://github.com/devgiahuy"
+        email="ngogiahuy.work@gmail.com"
+        phone="+84-797-528-060"
       />
 
       <AboutSection
@@ -210,8 +87,18 @@ const App: React.FC = () => {
         description="Motivated frontend intern passionate about building real-world web apps, improving React + TypeScript skills, and beginning to expand into Node.js backend. I focus on writing clean, maintainable code and creating seamless user experiences."
         location="Ho Chi Minh City, Vietnam"
         university="FPT University"
-        languages="English, Vietnamese"
+        // languages="English, Vietnamese"
         status="Available for Internship"
+      />
+
+      <EducationSection
+        id="education"
+        title="Education"
+        subtitle="Formal training in software engineering fundamentals."
+        school="FPT University HCM"
+        degree="Software Engineering"
+        time="09/2022 – 04/2027"
+        gpa="8.0 / 10"
       />
 
       <SkillsSection
@@ -236,27 +123,19 @@ const App: React.FC = () => {
         items={techExperienceItems}
       />
 
-      <EducationSection
-        id="education"
-        title="Education"
-        subtitle="Formal training in software engineering fundamentals."
-        school="FPT University HCM"
-        degree="Software Engineering"
-        time="09/2022 – 04/2027"
-        gpa="8.0 / 10"
-      />
+      <RoadmapSection />
 
       <ContactSection
         id="contact"
         title="Contact"
         subtitle="Reach out to discuss internship opportunities or collaborations."
-        email="you@example.com"
-        githubUrl="https://github.com/your-handle"
+        email="ngogiahuy.work@gmail.com"
+        githubUrl="https://github.com/devgiahuy"
       />
 
       <Footer />
     </div>
   );
-};
+}
 
 export default App;

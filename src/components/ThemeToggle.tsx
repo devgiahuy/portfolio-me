@@ -1,10 +1,12 @@
-import React from "react";
 import type { Theme } from "../hooks/useTheme";
 
-const ThemeToggle: React.FC<{ theme: Theme; onToggle: () => void }> = ({
+function ThemeToggle({
   theme,
   onToggle,
-}) => {
+}: {
+  theme: Theme;
+  onToggle: () => void;
+}) {
   const isDark = theme === "dark";
   return (
     <button
@@ -63,6 +65,6 @@ const ThemeToggle: React.FC<{ theme: Theme; onToggle: () => void }> = ({
       </span>
     </button>
   );
-};
+}
 
 export default ThemeToggle;

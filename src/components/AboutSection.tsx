@@ -1,16 +1,15 @@
-import React from "react";
 import type { AboutSectionProps } from "../types/sections";
 
-const AboutSection: React.FC<AboutSectionProps> = ({
+function AboutSection({
   id,
   title,
   subtitle,
   description,
   location,
   university,
-  languages,
+  // languages,
   status,
-}) => {
+}: AboutSectionProps) {
   return (
     <section
       id={id}
@@ -85,7 +84,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({
                   {university}
                 </dd>
               </div>
-              <div className="flex items-center justify-between gap-4">
+              {/* <div className="flex items-center justify-between gap-4">
                 <dt className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +108,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({
                 <dd className="font-medium text-slate-900 dark:text-slate-50">
                   {languages}
                 </dd>
-              </div>
+              </div> */}
               <div className="flex items-center justify-between gap-4">
                 <dt className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                   <svg
@@ -142,6 +141,6 @@ const AboutSection: React.FC<AboutSectionProps> = ({
       </div>
     </section>
   );
-};
+}
 
 export default AboutSection;

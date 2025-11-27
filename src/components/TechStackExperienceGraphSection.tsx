@@ -1,9 +1,11 @@
-import React from "react";
 import type { TechStackExperienceGraphSectionProps } from "../types/sections";
 
-const TechStackExperienceGraphSection: React.FC<
-  TechStackExperienceGraphSectionProps
-> = ({ id, title, subtitle, items }) => {
+function TechStackExperienceGraphSection({
+  id,
+  title,
+  subtitle,
+  items,
+}: TechStackExperienceGraphSectionProps) {
   return (
     <section
       id={id}
@@ -57,6 +59,6 @@ const TechStackExperienceGraphSection: React.FC<
       </div>
     </section>
   );
-};
+}
 
 export default TechStackExperienceGraphSection;

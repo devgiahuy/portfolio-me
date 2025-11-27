@@ -1,12 +1,11 @@
-import React from "react";
 import type { ProjectsSectionProps } from "../types/sections";
 
-const ProjectsSection: React.FC<ProjectsSectionProps> = ({
+function ProjectsSection({
   id,
   title,
   subtitle,
   projects,
-}) => {
+}: ProjectsSectionProps) {
   return (
     <section
       id={id}
@@ -62,7 +61,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 ))}
               </div>
 
-              {project.codeSnippet && (
+              {/* {project.codeSnippet && (
                 <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50/80 p-3 text-xs text-slate-800 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100">
                   <div className="mb-1 flex items-center justify-between text-[0.7rem] text-slate-500 dark:text-slate-400">
                     <span>// snippet</span>
@@ -72,7 +71,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     <code>{project.codeSnippet}</code>
                   </pre>
                 </div>
-              )}
+              )} */}
 
               <div className="mt-5 flex justify-between items-center gap-4">
                 <a
@@ -105,6 +104,6 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       </div>
     </section>
   );
-};
+}
 
 export default ProjectsSection;

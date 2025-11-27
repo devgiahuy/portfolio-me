@@ -1,7 +1,6 @@
-import React from "react";
 import type { EducationSectionProps } from "../types/sections";
 
-const EducationSection: React.FC<EducationSectionProps> = ({
+function EducationSection({
   id,
   title,
   subtitle,
@@ -9,7 +8,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({
   degree,
   time,
   gpa,
-}) => {
+}: EducationSectionProps) {
   return (
     <section
       id={id}
@@ -30,7 +29,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({
         </div>
 
         <div className="relative rounded-3xl border border-slate-200 bg-cardLight p-6 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark">
-          <div className="absolute left-4 top-1/2 h-24 -translate-y-1/2 border-l border-dashed border-emerald-400/70" />
+          <div className="absolute left-[1.85rem] top-1/2 h-24 -translate-y-1/2 border-l border-dashed border-emerald-400/70" />
           <div className="flex items-start gap-4">
             <div className="relative mt-1">
               <span className="flex h-3 w-3 items-center justify-center rounded-full border border-emerald-400 bg-emerald-400 shadow-cardSoft" />
@@ -54,6 +53,6 @@ const EducationSection: React.FC<EducationSectionProps> = ({
       </div>
     </section>
   );
-};
+}
 
 export default EducationSection;
