@@ -20,11 +20,7 @@ export const projects: Project[] = [
     ],
     teamSize: "5",
     githubUrl: "https://github.com/hycat-team/green-wheel-fe",
-    images: [
-      "src/assets/img/1.png",
-      "src/assets/img/3.png",
-      "src/assets/img/4.png",
-    ],
+    images: ["img/1.png", "img/3.png", "img/4.png"],
     codeSnippet:
       "const { data: vehicles } = useQuery(['vehicles'], fetchVehicles);\n\nreturn <VehicleGrid items={vehicles} />;",
   },

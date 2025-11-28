@@ -74,7 +74,7 @@ function HeroSection({
             {/* Code snippet */}
             <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 p-4 text-sm shadow-cardSoft backdrop-blur-sm dark:border-neonPurple/40 dark:from-neonPurple/20 dark:via-slate-900 dark:to-neonCyan/10 dark:shadow-cardNeon w-full">
               <div className="mb-2 flex items-center justify-between text-xs text-slate-600 dark:text-slate-300">
-                <span>// Developer.ts</span>
+                <span>// developer.ts</span>
                 <span>TypeScript</span>
               </div>
               <pre className="font-mono text-sm text-slate-900 dark:text-slate-50">
