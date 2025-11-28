@@ -45,6 +45,8 @@ export type Project = {
   teamSize?: string;
   githubUrl: string;
   codeSnippet?: string;
+  image?: string;
+  images?: string[];
 };
 
 export type ProjectsSectionProps = SectionBaseProps & {
