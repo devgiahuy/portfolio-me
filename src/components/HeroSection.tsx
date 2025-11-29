@@ -41,7 +41,7 @@ function HeroSection({
             </p>
           </div>
 
-          <div className="grid gap-4 lg:grid-cols-2 w-screen max-w-[50rem]">
+          <div className="grid gap-4 lg:grid-cols-2 sm:w-full lg:w-screen max-w-[50rem]">
             {/* Terminal card */}
             {/* <div className="rounded-3xl border border-slate-200 bg-white/80 p-4 text-sm shadow-cardSoft backdrop-blur-sm dark:border-slate-800 dark:bg-cardDark/80 dark:shadow-cardNeon w-full">
               <div className="mb-3 flex items-center gap-1.5">
@@ -72,12 +72,12 @@ function HeroSection({
             </div> */}
 
             {/* Code snippet */}
-            <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 p-4 text-sm shadow-cardSoft backdrop-blur-sm dark:border-neonPurple/40 dark:from-neonPurple/20 dark:via-slate-900 dark:to-neonCyan/10 dark:shadow-cardNeon w-full">
+            <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 p-4 text-sm shadow-cardSoft backdrop-blur-sm dark:border-neonPurple/40 dark:from-neonPurple/20 dark:via-slate-900 dark:to-neonCyan/10 dark:shadow-cardNeon">
               <div className="mb-2 flex items-center justify-between text-xs text-slate-600 dark:text-slate-300">
                 <span>// developer.ts</span>
                 <span>TypeScript</span>
               </div>
-              <pre className="font-mono text-sm text-slate-900 dark:text-slate-50">
+              <pre className="font-mono text-xs sm:text-sm text-slate-900 dark:text-slate-50 overflow-x-auto">
                 <code>
                   {`const developer = {
   name: "Ngo Gia Huy",

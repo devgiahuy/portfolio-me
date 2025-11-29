@@ -19,9 +19,9 @@ function ProjectCard({
   };
 
   return (
-    <article className="group flex h-full w-[460px] flex-col rounded-3xl border border-slate-200 bg-cardLight shadow-cardSoft transition hover:-translate-y-1 hover:border-primary/70 hover:shadow-lg dark:border-slate-800 dark:bg-cardDark dark:hover:border-neonPurple/80 dark:hover:shadow-cardNeon overflow-hidden">
+    <article className="group flex h-full w-full flex-col rounded-3xl border border-slate-200 bg-cardLight shadow-cardSoft transition hover:-translate-y-1 hover:border-primary/70 hover:shadow-lg dark:border-slate-800 dark:bg-cardDark dark:hover:border-neonPurple/80 dark:hover:shadow-cardNeon overflow-hidden">
       {images.length > 0 && (
-        <div className="relative h-[220px] w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+        <div className="relative h-48 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
           <img
             src={images[currentImageIndex]}
             alt={`${project.title} - Image ${currentImageIndex + 1}`}
@@ -178,7 +178,7 @@ function ProjectsSection({
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
           {projects.map((project) => {
             const projectImages =
               project.images || (project.image ? [project.image] : []);
