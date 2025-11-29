@@ -1,15 +1,8 @@
+import { useLanguage } from "../hooks/useLanguage";
 import type { AboutSectionProps } from "../types/sections";
 
-function AboutSection({
-  id,
-  title,
-  subtitle,
-  description,
-  location,
-  university,
-  // languages,
-  status,
-}: AboutSectionProps) {
+function AboutSection({ id }: AboutSectionProps) {
+  const { t } = useLanguage();
   return (
     <section
       id={id}
@@ -19,19 +12,17 @@ function AboutSection({
         <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-              {title}
+              {t("about.title")}
             </h2>
-            {subtitle && (
-              <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
-                {subtitle}
-              </p>
-            )}
+            <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
+              {t("about.subtitle")}
+            </p>
           </div>
         </div>
 
         <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)]">
           <div className="rounded-3xl border border-slate-200 bg-cardLight p-6 text-base text-slate-700 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark dark:text-slate-200">
-            {description}
+            {t("about.description")}
           </div>
           <div className="rounded-3xl border border-slate-200 bg-cardLight p-6 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark">
             <dl className="space-y-4 text-base">
@@ -50,10 +41,10 @@ function AboutSection({
                     <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0Z" />
                     <circle cx="12" cy="10" r="3" />
                   </svg>
-                  Location
+                  {t("about.info.location")}
                 </dt>
                 <dd className="font-medium text-slate-900 dark:text-slate-50">
-                  {location}
+                  {t("about.info.locationValue")}
                 </dd>
               </div>
               <div className="flex items-center justify-between gap-4">
@@ -78,10 +69,10 @@ function AboutSection({
                     <path d="m19 19 3 3" />
                     <circle cx="12" cy="12" r="4" />
                   </svg>
-                  University
+                  {t("about.info.university")}
                 </dt>
                 <dd className="font-medium text-slate-900 dark:text-slate-50">
-                  {university}
+                  {t("about.info.universityValue")}
                 </dd>
               </div>
               {/* <div className="flex items-center justify-between gap-4">
@@ -126,12 +117,12 @@ function AboutSection({
                     <path d="M7 12h.01" />
                     <path d="M17 12h.01" />
                   </svg>
-                  Status
+                  {t("about.info.status")}
                 </dt>
                 <dd>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                    {status}
+                    {t("about.info.statusValue")}
                   </span>
                 </dd>
               </div>

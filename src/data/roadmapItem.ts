@@ -2,27 +2,23 @@ import type { RoadmapItem } from "../types/sections";
 
 export const roadmapItems: RoadmapItem[] = [
   {
-    title: "Master React ecosystem",
-    description:
-      "Deepen understanding of hooks, advanced patterns, concurrent features, and building design systems with TypeScript support.",
+    title: "roadmap.masterReact.title",
+    description: "roadmap.masterReact.description",
     color: "bg-[#7C4DFF]",
   },
   {
-    title: "Learn Node.js + Express",
-    description:
-      "Build REST APIs, authentication flows, and integrate frontend apps with scalable backend services.",
+    title: "roadmap.learnNode.title",
+    description: "roadmap.learnNode.description",
     color: "bg-[#9D75FF]",
   },
   {
-    title: "Build fullstack side project",
-    description:
-      "Ship a production‑style app using Next.js, Node.js, and a database, focusing on real deployment and monitoring.",
+    title: "roadmap.buildFullstack.title",
+    description: "roadmap.buildFullstack.description",
     color: "bg-[#C5A3FF]",
   },
   {
-    title: "Improve testing (Vitest, RTL)",
-    description:
-      "Add component tests, hooks tests, and basic integration tests to ensure stability and confidence in refactors.",
+    title: "roadmap.improveTesting.title",
+    description: "roadmap.improveTesting.description",
     color: "bg-emerald-400",
   },
 ];

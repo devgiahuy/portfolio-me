@@ -1,12 +1,13 @@
+import { useLanguage } from "../hooks/useLanguage";
 import type { SkillsSectionProps } from "../types/sections";
 
 function SkillsSection({
   id,
-  title,
-  subtitle,
+
   categories,
   iconStacks,
 }: SkillsSectionProps) {
+  const { t } = useLanguage();
   return (
     <section
       id={id}
@@ -16,13 +17,11 @@ function SkillsSection({
         <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-              {title}
+              {t("skills.title")}
             </h2>
-            {subtitle && (
-              <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
-                {subtitle}
-              </p>
-            )}
+            <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
+              {t("skills.subtitle")}
+            </p>
           </div>
         </div>
 
@@ -34,7 +33,12 @@ function SkillsSection({
                 className="group rounded-3xl border border-slate-200 bg-cardLight p-5 shadow-cardSoft transition hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-lg dark:border-slate-800 dark:bg-cardDark dark:hover:border-neonPurple/70 dark:hover:shadow-cardNeon"
               >
                 <h3 className="mb-2 text-base font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-                  {cat.title}
+                  {t(
+                    `skills.categories.${cat.title
+                      .replace(/ /g, "")
+                      .replace(/\//, "")
+                      .toLowerCase()}`
+                  )}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {cat.items.map((item) => (
@@ -53,7 +57,7 @@ function SkillsSection({
           {/* Icon grid */}
           <div className="rounded-3xl border border-slate-200 bg-cardLight p-6 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark">
             <h3 className="mb-4 text-base font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-              Core Frontend Stack
+              {t("skills.coreStack")}
             </h3>
             <div className="grid grid-cols-3 gap-4 sm:grid-cols-4">
               {iconStacks.map((stack) => (
@@ -71,8 +75,7 @@ function SkillsSection({
               ))}
             </div>
             <p className="mt-4 text-base text-slate-600 dark:text-slate-300">
-              Focused on building reliable UI architecture, reusable components,
-              and smooth developer workflows with modern tooling.
+              {t("skills.stackDescription")}
             </p>
           </div>
         </div>

@@ -1,14 +1,18 @@
+import { useLanguage } from "../hooks/useLanguage";
 import type { HeroSectionProps } from "../types/sections";
+import { FaGithub, FaReact } from "react-icons/fa";
+import { HiMail, HiPhone } from "react-icons/hi";
+import { BiLogoTypescript } from "react-icons/bi";
+import { SiNextdotjs } from "react-icons/si";
 
 function HeroSection({
   id,
-  name,
-  role,
-  subtitle,
+
   githubUrl,
   email,
   phone,
 }: HeroSectionProps) {
+  const { t } = useLanguage();
   return (
     <section
       id={id}
@@ -26,18 +30,18 @@ function HeroSection({
         <div className="flex-1 space-y-6">
           <div className="inline-flex items-center rounded-full border border-primary/20 bg-white/70 px-3 py-1 text-sm text-slate-700 shadow-cardSoft backdrop-blur-sm dark:border-neonPurple/40 dark:bg-slate-900/70 dark:text-slate-200 dark:shadow-cardNeon">
             <span className="mr-2 inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            Available for Frontend Internship
+            {t("hero.availability")}
           </div>
 
           <div>
             <h1 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl md:text-6xl dark:text-slate-50">
-              {name}
+              {t("hero.name")}
             </h1>
             <p className="mt-2 text-xl font-medium text-primary dark:text-neonPurple">
-              {role}
+              {t("hero.role")}
             </p>
             <p className="mt-4 text-lg text-slate-700 dark:text-slate-300">
-              {subtitle}
+              {t("hero.subtitle")}
             </p>
           </div>
 
@@ -74,8 +78,8 @@ function HeroSection({
             {/* Code snippet */}
             <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 p-4 text-sm shadow-cardSoft backdrop-blur-sm dark:border-neonPurple/40 dark:from-neonPurple/20 dark:via-slate-900 dark:to-neonCyan/10 dark:shadow-cardNeon">
               <div className="mb-2 flex items-center justify-between text-xs text-slate-600 dark:text-slate-300">
-                <span>// developer.ts</span>
-                <span>TypeScript</span>
+                <span>{t("hero.code.comment")}</span>
+                <span>{t("hero.code.language")}</span>
               </div>
               <pre className="font-mono text-xs sm:text-sm text-slate-900 dark:text-slate-50 overflow-x-auto">
                 <code>
@@ -97,59 +101,22 @@ function HeroSection({
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/70 px-4 py-2 text-sm font-medium text-slate-800 shadow-cardSoft transition hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-neonPurple dark:hover:text-neonPurple"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M9 19c-4.3 1.5-4.3-2.5-6-3" />
-                <path d="M15 19c4.3 1.5 4.3-2.5 6-3" />
-                <path d="M9 22c1 .5 2 .5 3 0 1 .5 2 .5 3 0" />
-                <path d="M9 2C5 2 3 4 3 8c0 5 3 9 9 9s9-4 9-9c0-4-2-6-6-6" />
-              </svg>
-              GitHub
+              <FaGithub className="h-4 w-4" />
+              {t("hero.cta.github")}
             </a>
             <a
               href={`mailto:${email}`}
               className="inline-flex items-center gap-2 rounded-full border border-transparent bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 shadow-cardSoft transition hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect width="20" height="16" x="2" y="4" rx="2" ry="2" />
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-              </svg>
-              Email
+              <HiMail className="h-4 w-4" />
+              {t("hero.cta.email")}
             </a>
             <a
               href={`tel:${phone}`}
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-transparent px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-700 dark:text-slate-200 dark:hover:border-neonPurple dark:hover:text-neonPurple"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.11 4.1 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-              Phone
+              <HiPhone className="h-4 w-4" />
+              {t("hero.cta.phone")}
             </a>
           </div>
         </div>
@@ -160,14 +127,13 @@ function HeroSection({
             <div className="h-52 w-52 rounded-full border border-white/60 bg-white/90 shadow-cardSoft backdrop-blur dark:border-slate-700/60 dark:bg-slate-950/90">
               <div className="flex h-full flex-col items-center justify-center text-center px-6">
                 <span className="text-sm font-medium uppercase tracking-tight text-primary dark:text-neonPurple">
-                  Frontend Intern
+                  {t("hero.avatar.role")}
                 </span>
                 <span className="mt-2 text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-                  Clean, modern, performant UIs
+                  {t("hero.avatar.description")}
                 </span>
                 <span className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                  Focused on React, TypeScript, Next.js and delightful developer
-                  experience.
+                  {t("hero.avatar.focus")}
                 </span>
               </div>
             </div>
@@ -176,7 +142,8 @@ function HeroSection({
             <div className="pointer-events-none absolute top-3 left-0">
               <div className="animate-[float_6s_ease-in-out_infinite] rounded-2xl border border-slate-200 bg-white/90 px-2.5 py-1.5 text-xs font-medium text-slate-800 shadow-cardSoft dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-100">
                 <span className="mr-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-sky-500/10 text-sky-500">
-                  ⚛
+                  {/* ⚛ */}
+                  <FaReact />
                 </span>
                 React
               </div>
@@ -184,7 +151,8 @@ function HeroSection({
             <div className="pointer-events-none absolute -right-9 top-10">
               <div className="animate-[float_7s_ease-in-out_infinite] rounded-2xl border border-slate-200 bg-white/90 px-2.5 py-1.5 text-xs font-medium text-slate-800 shadow-cardSoft dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-100">
                 <span className="mr-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-blue-500/10 text-blue-500">
-                  TS
+                  {/* TS */}
+                  <BiLogoTypescript />
                 </span>
                 TypeScript
               </div>
@@ -192,7 +160,8 @@ function HeroSection({
             <div className="pointer-events-none absolute -bottom-3 left-10">
               <div className="animate-[float_8s_ease-in-out_infinite] rounded-2xl border border-slate-200 bg-white/90 px-2.5 py-1.5 text-xs font-medium text-slate-800 shadow-cardSoft dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-100">
                 <span className="mr-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-slate-900 text-slate-50">
-                  N
+                  {/* N */}
+                  <SiNextdotjs />
                 </span>
                 Next.js
               </div>

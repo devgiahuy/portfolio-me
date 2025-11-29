@@ -1,13 +1,9 @@
 import { useState } from "react";
+import { useLanguage } from "../hooks/useLanguage";
 import type { ContactSectionProps } from "../types/sections";
 
-function ContactSection({
-  id,
-  title,
-  subtitle,
-  email,
-  githubUrl,
-}: ContactSectionProps) {
+function ContactSection({ id, email, githubUrl }: ContactSectionProps) {
+  const { t } = useLanguage();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
@@ -22,8 +18,12 @@ function ContactSection({
     }
 
     // Create mailto link with pre-filled content
-    const subject = `Portfolio Contact from ${form.name}`;
-    const body = `Name: ${form.name}%0D%0AEmail: ${form.email}%0D%0A%0D%0AMessage:%0D%0A${form.message}`;
+    const subject = `${t("contact.form.name")}: ${form.name}`;
+    const body = `${t("contact.form.name")}: ${form.name}%0D%0A${t(
+      "contact.form.email"
+    )}: ${form.email}%0D%0A%0D%0A${t("contact.form.message")}:%0D%0A${
+      form.message
+    }`;
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
       subject
     )}&body=${body}`;
@@ -50,13 +50,11 @@ function ContactSection({
         <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-              {title}
+              {t("contact.title")}
             </h2>
-            {subtitle && (
-              <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
-                {subtitle}
-              </p>
-            )}
+            <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
+              {t("contact.subtitle")}
+            </p>
           </div>
         </div>
 
@@ -71,7 +69,7 @@ function ContactSection({
                   htmlFor="contact-name"
                   className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
                 >
-                  Name
+                  {t("contact.form.name")}
                 </label>
                 <input
                   id="contact-name"
@@ -79,7 +77,7 @@ function ContactSection({
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className="w-full rounded-xl border border-slate-300 bg-white/80 px-3 py-2.5 text-base text-slate-900 shadow-inner shadow-slate-900/5 outline-none ring-0 transition placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/30 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-neonPurple dark:focus:ring-neonPurple/40"
-                  placeholder="Your name"
+                  placeholder={t("contact.form.namePlaceholder")}
                 />
               </div>
               <div>
@@ -87,7 +85,7 @@ function ContactSection({
                   htmlFor="contact-email"
                   className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
                 >
-                  Email
+                  {t("contact.form.email")}
                 </label>
                 <input
                   id="contact-email"
@@ -95,7 +93,7 @@ function ContactSection({
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full rounded-xl border border-slate-300 bg-white/80 px-3 py-2.5 text-base text-slate-900 shadow-inner shadow-slate-900/5 outline-none ring-0 transition placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/30 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-neonPurple dark:focus:ring-neonPurple/40"
-                  placeholder="you@example.com"
+                  placeholder={t("contact.form.emailPlaceholder")}
                 />
               </div>
             </div>
@@ -104,7 +102,7 @@ function ContactSection({
                 htmlFor="contact-message"
                 className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200"
               >
-                Message
+                {t("contact.form.message")}
               </label>
               <textarea
                 id="contact-message"
@@ -112,19 +110,19 @@ function ContactSection({
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 className="w-full rounded-xl border border-slate-300 bg-white/80 px-3 py-2.5 text-base text-slate-900 shadow-inner shadow-slate-900/5 outline-none ring-0 transition placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/30 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-neonPurple dark:focus:ring-neonPurple/40"
-                placeholder="Tell me about the role or project..."
+                placeholder={t("contact.form.messagePlaceholder")}
               />
             </div>
 
             {status === "success" && (
               <div className="rounded-xl bg-green-50 p-3 text-sm text-green-700 dark:bg-green-900/20 dark:text-green-400">
-                Opening your email client...
+                {t("contact.form.success")}
               </div>
             )}
 
             {status === "error" && (
               <div className="rounded-xl bg-red-50 p-3 text-sm text-red-700 dark:bg-red-900/20 dark:text-red-400">
-                Please fill in all fields.
+                {t("contact.form.error")}
               </div>
             )}
 
@@ -133,14 +131,16 @@ function ContactSection({
               disabled={status === "success"}
               className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary via-secondary to-accent px-6 py-2.5 text-sm font-semibold tracking-tight text-slate-50 shadow-cardSoft transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 dark:from-neonPurple dark:via-neonCyan dark:to-neonPurple dark:shadow-cardNeon"
             >
-              {status === "success" ? "✓ Sent!" : "Send Message"}
+              {status === "success"
+                ? t("contact.form.sending")
+                : t("contact.form.submit")}
             </button>
           </form>
 
           <div className="space-y-4">
             <div className="rounded-3xl border border-slate-200 bg-cardLight p-5 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark">
               <h3 className="text-base font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-                Quick links
+                {t("contact.quickLinks")}
               </h3>
               <div className="mt-4 space-y-3 text-base">
                 <a
@@ -183,16 +183,12 @@ function ContactSection({
                     <path d="M9 22c1 .5 2 .5 3 0 1 .5 2 .5 3 0" />
                     <path d="M9 2C5 2 3 4 3 8c0 5 3 9 9 9s9-4 9-9c0-4-2-6-6-6" />
                   </svg>
-                  GitHub
+                  {t("contact.quickLinksGithub")}
                 </a>
               </div>
             </div>
             <div className="rounded-3xl border border-dashed border-primary/30 bg-primary/5 p-5 text-base text-slate-700 dark:border-neonPurple/40 dark:bg-neonPurple/10 dark:text-slate-100">
-              <p>
-                Open to frontend internships and junior roles. I'm especially
-                interested in modern React/TypeScript stacks with strong
-                engineering practices.
-              </p>
+              <p>{t("contact.note")}</p>
             </div>
           </div>
         </div>

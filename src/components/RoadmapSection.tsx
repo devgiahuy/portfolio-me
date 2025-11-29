@@ -1,6 +1,8 @@
+import { useLanguage } from "../hooks/useLanguage";
 import { roadmapItems } from "../data/roadmapItem";
 
 function RoadmapSection() {
+  const { t } = useLanguage();
   return (
     <section
       id="career-roadmap"
@@ -10,10 +12,10 @@ function RoadmapSection() {
         <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-              Career Roadmap
+              {t("roadmap.title")}
             </h2>
             <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
-              How I plan to grow as a frontend and fullstack engineer.
+              {t("roadmap.subtitle")}
             </p>
           </div>
         </div>
@@ -29,10 +31,10 @@ function RoadmapSection() {
                   className={`absolute left-2 top-1.5 h-2.5 w-2.5 rounded-full border-2 border-white ${item.color} shadow-sm dark:border-slate-900`}
                 ></div>
                 <p className="text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-                  {item.title}
+                  {t(item.title)}
                 </p>
                 <p className="mt-1 text-base text-slate-600 dark:text-slate-300">
-                  {item.description}
+                  {t(item.description)}
                 </p>
               </li>
             ))}
@@ -41,13 +43,10 @@ function RoadmapSection() {
           {/* Summary card */}
           <div className="rounded-3xl border border-slate-200 bg-cardLight p-6 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark">
             <h3 className="mb-3 text-base font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-              What this means for you
+              {t("roadmap.summaryTitle")}
             </h3>
             <p className="text-base text-slate-600 dark:text-slate-300">
-              As a frontend intern, I can already ship production‑ready UIs
-              while continuously improving my understanding of the full stack. I
-              value clear communication, code ownership, and iterating quickly
-              with feedback.
+              {t("roadmap.summaryDescription")}
             </p>
           </div>
         </div>

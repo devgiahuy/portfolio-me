@@ -1,11 +1,11 @@
+import { useLanguage } from "../hooks/useLanguage";
 import type { TechStackExperienceGraphSectionProps } from "../types/sections";
 
 function TechStackExperienceGraphSection({
   id,
-  title,
-  subtitle,
   items,
 }: TechStackExperienceGraphSectionProps) {
+  const { t } = useLanguage();
   return (
     <section
       id={id}
@@ -15,13 +15,11 @@ function TechStackExperienceGraphSection({
         <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-              {title}
+              {t("techExperience.title")}
             </h2>
-            {subtitle && (
-              <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
-                {subtitle}
-              </p>
-            )}
+            <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
+              {t("techExperience.subtitle")}
+            </p>
           </div>
         </div>
 

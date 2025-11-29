@@ -1,14 +1,14 @@
+import { useLanguage } from "../hooks/useLanguage";
 import type { EducationSectionProps } from "../types/sections";
 
 function EducationSection({
   id,
-  title,
-  subtitle,
   school,
   degree,
   time,
   gpa,
 }: EducationSectionProps) {
+  const { t } = useLanguage();
   return (
     <section
       id={id}
@@ -18,13 +18,11 @@ function EducationSection({
         <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-              {title}
+              {t("education.title")}
             </h2>
-            {subtitle && (
-              <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
-                {subtitle}
-              </p>
-            )}
+            <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
+              {t("education.subtitle")}
+            </p>
           </div>
         </div>
 

@@ -1,4 +1,6 @@
 import ThemeToggle from "./ThemeToggle";
+import LanguageToggle from "./LanguageToggle";
+import { useLanguage } from "../hooks/useLanguage";
 import type { NavItem } from "../types/sections";
 import type { Theme } from "../hooks/useTheme";
 
@@ -17,6 +19,8 @@ function Navbar({
   theme,
   onToggleTheme,
 }: NavbarProps) {
+  const { t } = useLanguage();
+
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-backgroundLight/80 backdrop-blur-md dark:border-slate-800/80 dark:bg-backgroundDark/80">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
@@ -30,10 +34,10 @@ function Navbar({
           </div>
           <div className="flex flex-col">
             <span className="text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-              Ngo Gia Huy
+              {t("navbar.name")}
             </span>
             <span className="text-sm text-slate-500 dark:text-slate-400">
-              Frontend Development Intern
+              {t("navbar.role")}
             </span>
           </div>
         </div>
@@ -52,7 +56,7 @@ function Navbar({
                   }`}
                   onClick={() => onNavigate(item.id)}
                 >
-                  {item.label}
+                  {t(item.label)}
                   {isActive && (
                     <span className="absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-primary via-secondary to-accent dark:from-neonPurple dark:via-neonCyan dark:to-neonPurple" />
                   )}
@@ -63,6 +67,7 @@ function Navbar({
         </div>
 
         <div className="flex items-center gap-3">
+          <LanguageToggle />
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
         </div>
       </nav>
