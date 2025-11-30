@@ -24,6 +24,11 @@ function App() {
   const [theme, toggleTheme] = useTheme();
   const [activeId, setActiveId] = useState<string>("about");
 
+  // Scroll to top on page load/reload
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
