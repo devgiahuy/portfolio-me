@@ -27,7 +27,8 @@ function Navbar({
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-primary to-secondary shadow-cardSoft dark:shadow-cardNeon">
             <img
-              src="https://scontent.fsgn15-1.fna.fbcdn.net/v/t39.30808-6/433446266_758349243066734_884520383743627659_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=g_wtduZOv7YQ7kNvwEMXdWM&_nc_oc=Adk-UwvW4dVQ2B9dnLOy2p2FU47x_BOpKgs9-yR6XAagx9BUg2CSxZgIcNcZgkrfM_oBlKCUGkD2I06Nbk2OCzXB&_nc_zt=23&_nc_ht=scontent.fsgn15-1.fna&_nc_gid=X5VXxKm88oGGwxgTGK9caw&oh=00_Afi1qBYmiyAVOVFnnkuLzS94RTdE7PZhlinCWYRcy53tXg&oe=692ED7EB"
+              // src="https://scontent.fsgn15-1.fna.fbcdn.net/v/t39.30808-6/433446266_758349243066734_884520383743627659_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=g_wtduZOv7YQ7kNvwEMXdWM&_nc_oc=Adk-UwvW4dVQ2B9dnLOy2p2FU47x_BOpKgs9-yR6XAagx9BUg2CSxZgIcNcZgkrfM_oBlKCUGkD2I06Nbk2OCzXB&_nc_zt=23&_nc_ht=scontent.fsgn15-1.fna&_nc_gid=X5VXxKm88oGGwxgTGK9caw&oh=00_Afi1qBYmiyAVOVFnnkuLzS94RTdE7PZhlinCWYRcy53tXg&oe=692ED7EB"
+              src="img/me.jpg"
               alt="Ngo Gia Huy"
               className="h-full w-full object-cover"
             />
