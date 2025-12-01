@@ -1,13 +1,57 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "../hooks/useLanguage";
 import type { TechStackExperienceGraphSectionProps } from "../types/sections";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function TechStackExperienceGraphSection({
   id,
   items,
 }: TechStackExperienceGraphSectionProps) {
   const { t } = useLanguage();
+  const sectionRef = useRef<HTMLElement>(null);
+  const barsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const bars = barsRef.current;
+
+    if (!section || !bars) return;
+
+    const ctx = gsap.context(() => {
+      const progressBars = bars.querySelectorAll(".tech-progress-bar");
+
+      progressBars.forEach((bar, index) => {
+        const percentage = bar.getAttribute("data-percentage");
+
+        gsap.fromTo(
+          bar,
+          {
+            width: "0%",
+          },
+          {
+            width: percentage + "%",
+            duration: 1.5,
+            ease: "power2.out",
+            delay: index * 0.1,
+            scrollTrigger: {
+              trigger: bar,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id={id}
       className="border-b border-slate-200/70 bg-backgroundLight py-14 dark:border-slate-800 dark:bg-backgroundDark"
     >
@@ -24,7 +68,7 @@ function TechStackExperienceGraphSection({
         </div>
 
         <div className="rounded-3xl border border-slate-200 bg-cardLight p-6 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark">
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div ref={barsRef} className="grid gap-4 sm:grid-cols-2">
             {items.map((item) => {
               const max = item.maxScore ?? 5;
               const percent = (item.score / max) * 100;
@@ -45,8 +89,9 @@ function TechStackExperienceGraphSection({
                   </div>
                   <div className="relative h-2.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
                     <div
-                      className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-primary via-secondary to-accent transition-all dark:from-neonPurple dark:via-neonCyan dark:to-neonPurple"
-                      style={{ width: `${percent}%` }}
+                      className="tech-progress-bar absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-primary via-secondary to-accent transition-all dark:from-neonPurple dark:via-neonCyan dark:to-neonPurple"
+                      data-percentage={percent}
+                      style={{ width: "0%" }}
                     />
                   </div>
                 </div>

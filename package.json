@@ -13,6 +13,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "gsap": "^3.13.0",
     "i18next": "^25.6.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
