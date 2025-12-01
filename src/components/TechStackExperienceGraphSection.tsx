@@ -55,8 +55,8 @@ function TechStackExperienceGraphSection({
       id={id}
       className="border-b border-slate-200/70 bg-backgroundLight py-14 dark:border-slate-800 dark:bg-backgroundDark"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-2 mb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
               {t("techExperience.title")}
@@ -67,7 +67,7 @@ function TechStackExperienceGraphSection({
           </div>
         </div>
 
-        <div className="rounded-3xl border border-slate-200 bg-cardLight p-6 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark">
+        <div className="p-6 border rounded-3xl border-slate-200 bg-cardLight shadow-cardSoft dark:border-slate-800 dark:bg-cardDark">
           <div ref={barsRef} className="grid gap-4 sm:grid-cols-2">
             {items.map((item) => {
               const max = item.maxScore ?? 5;
@@ -89,7 +89,7 @@ function TechStackExperienceGraphSection({
                   </div>
                   <div className="relative h-2.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
                     <div
-                      className="tech-progress-bar absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-primary via-secondary to-accent transition-all dark:from-neonPurple dark:via-neonCyan dark:to-neonPurple"
+                      className="absolute inset-y-0 left-0 transition-all rounded-full tech-progress-bar bg-gradient-to-r from-primary via-secondary to-accent dark:from-neonPurple dark:via-neonCyan dark:to-neonPurple"
                       data-percentage={percent}
                       style={{ width: "0%" }}
                     />
