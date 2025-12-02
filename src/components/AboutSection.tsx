@@ -1,36 +1,123 @@
 import { useLanguage } from "../hooks/useLanguage";
 import type { AboutSectionProps } from "../types/sections";
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function AboutSection({ id }: AboutSectionProps) {
   const { t } = useLanguage();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const descCardRef = useRef<HTMLDivElement>(null);
+  const infoCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate title and subtitle
+      gsap.from(titleRef.current, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      gsap.from(subtitleRef.current, {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Animate cards with stagger
+      gsap.from([descCardRef.current, infoCardRef.current], {
+        opacity: 0,
+        y: 40,
+        scale: 0.95,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Animate info items inside the card
+      const infoItems = infoCardRef.current?.querySelectorAll("dl > div");
+      if (infoItems) {
+        gsap.from(infoItems, {
+          opacity: 0,
+          x: 20,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: infoCardRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
   return (
     <section
+      ref={sectionRef}
       id={id}
       className="border-b border-slate-200/70 bg-backgroundLight py-14 dark:border-slate-800 dark:bg-backgroundDark"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-2 mb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
+            <h2
+              ref={titleRef}
+              className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50"
+            >
               {t("about.title")}
             </h2>
-            <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
+            <p
+              ref={subtitleRef}
+              className="mt-1 text-lg text-slate-600 dark:text-slate-300"
+            >
               {t("about.subtitle")}
             </p>
           </div>
         </div>
 
         <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)]">
-          <div className="rounded-3xl border border-slate-200 bg-cardLight p-6 text-base text-slate-700 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark dark:text-slate-200">
+          <div
+            ref={descCardRef}
+            className="p-6 text-base border rounded-3xl border-slate-200 bg-cardLight text-slate-700 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark dark:text-slate-200"
+          >
             {t("about.description")}
           </div>
-          <div className="rounded-3xl border border-slate-200 bg-cardLight p-6 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark">
+          <div
+            ref={infoCardRef}
+            className="p-6 border rounded-3xl border-slate-200 bg-cardLight shadow-cardSoft dark:border-slate-800 dark:bg-cardDark"
+          >
             <dl className="space-y-4 text-base">
               <div className="flex items-center justify-between gap-4">
                 <dt className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
+                    className="w-4 h-4"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -51,7 +138,7 @@ function AboutSection({ id }: AboutSectionProps) {
                 <dt className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
+                    className="w-4 h-4"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -75,36 +162,11 @@ function AboutSection({ id }: AboutSectionProps) {
                   {t("about.info.universityValue")}
                 </dd>
               </div>
-              {/* <div className="flex items-center justify-between gap-4">
-                <dt className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M9 4v2" />
-                    <path d="M15 4v2" />
-                    <rect width="16" height="16" x="4" y="3" rx="2" ry="2" />
-                    <path d="M4 11h16" />
-                    <path d="M11 15h1" />
-                    <path d="M12 15v3" />
-                  </svg>
-                  Languages
-                </dt>
-                <dd className="font-medium text-slate-900 dark:text-slate-50">
-                  {languages}
-                </dd>
-              </div> */}
               <div className="flex items-center justify-between gap-4">
                 <dt className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
+                    className="w-4 h-4"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"

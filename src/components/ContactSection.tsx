@@ -1,11 +1,87 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "../hooks/useLanguage";
 import type { ContactSectionProps } from "../types/sections";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function ContactSection({ id, email, githubUrl }: ContactSectionProps) {
   const { t } = useLanguage();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate title and subtitle
+      gsap.from(titleRef.current, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      gsap.from(subtitleRef.current, {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      // Animate form
+      if (formRef.current) {
+        gsap.from(formRef.current, {
+          opacity: 0,
+          x: -40,
+          duration: 0.8,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: formRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
+
+      // Animate sidebar
+      if (sidebarRef.current) {
+        gsap.from(sidebarRef.current, {
+          opacity: 0,
+          x: 40,
+          duration: 0.8,
+          delay: 0.2,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: sidebarRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,16 +119,23 @@ function ContactSection({ id, email, githubUrl }: ContactSectionProps) {
 
   return (
     <section
+      ref={sectionRef}
       id={id}
       className="border-b border-slate-200/70 bg-backgroundLight py-14 dark:border-slate-800 dark:bg-backgroundDark"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
+            <h2
+              ref={titleRef}
+              className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50"
+            >
               {t("contact.title")}
             </h2>
-            <p className="mt-1 text-lg text-slate-600 dark:text-slate-300">
+            <p
+              ref={subtitleRef}
+              className="mt-1 text-lg text-slate-600 dark:text-slate-300"
+            >
               {t("contact.subtitle")}
             </p>
           </div>
@@ -60,6 +143,7 @@ function ContactSection({ id, email, githubUrl }: ContactSectionProps) {
 
         <div className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <form
+            ref={formRef}
             className="space-y-4 rounded-3xl border border-slate-200 bg-cardLight p-6 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark"
             onSubmit={handleSubmit}
           >
@@ -137,7 +221,7 @@ function ContactSection({ id, email, githubUrl }: ContactSectionProps) {
             </button>
           </form>
 
-          <div className="space-y-4">
+          <div ref={sidebarRef} className="space-y-4">
             <div className="rounded-3xl border border-slate-200 bg-cardLight p-5 shadow-cardSoft dark:border-slate-800 dark:bg-cardDark">
               <h3 className="text-base font-semibold tracking-tight text-slate-900 dark:text-slate-50">
                 {t("contact.quickLinks")}

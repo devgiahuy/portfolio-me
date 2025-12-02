@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
@@ -18,15 +18,46 @@ import {
   techExperienceItems,
 } from "./data";
 import RoadmapSection from "./components/RoadmapSection";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useMouseGlow();
   const [theme, toggleTheme] = useTheme();
   const [activeId, setActiveId] = useState<string>("about");
+  const appRef = useRef<HTMLDivElement>(null);
 
   // Scroll to top on page load/reload
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Configure GSAP defaults
+    gsap.config({
+      force3D: true,
+      nullTargetWarn: false,
+    });
+
+    // Smooth scrolling configuration
+    gsap.defaults({
+      ease: "power3.out",
+      duration: 0.8,
+    });
+
+    // Refresh ScrollTrigger on resize
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      // Clean up all ScrollTrigger instances on unmount
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   useEffect(() => {
@@ -65,7 +96,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-backgroundLight text-slate-900 dark:bg-backgroundDark dark:text-slate-50">
+    <div
+      ref={appRef}
+      className="min-h-screen bg-backgroundLight text-slate-900 dark:bg-backgroundDark dark:text-slate-50"
+    >
       <Navbar
         items={navItems}
         activeId={activeId}
